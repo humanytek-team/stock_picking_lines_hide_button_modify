@@ -7,9 +7,40 @@
             <field name="model">stock.picking</field>
             <field name="inherit_id" ref="stock.view_picking_form"/>
             <field name="arch" type="xml">
-                
+
                 <xpath expr="//button[@name='show_details']" position="attributes">
                   <attribute name="groups">stock.group_stock_manager</attribute>
+                </xpath>
+
+                <xpath
+                  expr="//field[@name='pack_operation_product_ids']/tree"
+                  position="inside">
+                  <field name="env_user_is_stock_manager" invisible="1" />
+                </xpath>
+
+                <xpath
+                  expr="//field[@name='pack_operation_product_ids']/tree/field[@name='qty_done']"
+                  position="attributes">
+                  <attribute name="attrs">{'readonly': ['|', ('lots_visible', '=', True), ('env_user_is_stock_manager', '=', False)]}</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="view_pack_operation_details_form_qty_done_readonly" model="ir.ui.view">
+            <field name="name">pack.operation.details.form.qty.done.readonly</field>
+            <field name="model">stock.pack.operation</field>
+            <field name="inherit_id" ref="stock.view_pack_operation_details_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//form" position="inside">
+                  <field name="env_user_is_stock_manager" invisible="1" />
+                </xpath>
+
+                <xpath expr="//field[@name='qty_done']" position="attributes">
+                  <attribute name="attrs">
+                    {'readonly': ['|', ('lots_visible', '=', True), ('env_user_is_stock_manager', '=', False)]}
+                  </attribute>
                 </xpath>
 
             </field>
