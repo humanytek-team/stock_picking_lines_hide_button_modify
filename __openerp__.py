@@ -4,7 +4,7 @@
 
 {
     'name': 'Hide button "Modify" in lines of products in stock pickings.',
-    'version': '9.0.1.0.0',
+    'version': '9.0.1.0.1',
     'category': 'Stock',
     'author': 'Humanytek',
     'website': "http://www.humanytek.com",
